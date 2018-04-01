@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _05.Special_Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int specialNumber = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= specialNumber; i++)
+            {
+                if(i<10)
+                {
+                    if(i==5 || i==7)
+                    {
+                        Console.WriteLine($"{i} -> True");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{i} -> False");
+                    }
+                    
+                }
+                else if(i>=10 && i<100)
+                {
+                    int i1 = i % 10;
+                    int i2 = i / 10;
+                    if(i1+i2==5 || i1+i2==7 || i1+i2==11)
+                    {
+                        Console.WriteLine($"{i} -> True");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{i} -> False");
+                    }
+                }
+                else if(i>=100 && i<1000)
+                {
+                    int i1 = i % 10;
+                    int i2 = (i / 10)%10;
+                    int i3 = (i / 100) % 10;
+                    if (i1 + i2+i3 == 5 || i1 + i2+i3 == 7 || i1 + i2+i3 == 11)
+                    {
+                        Console.WriteLine($"{i} -> True");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{i} -> False");
+                    }
+                }
+            }
+
+        }
+    }
+}
