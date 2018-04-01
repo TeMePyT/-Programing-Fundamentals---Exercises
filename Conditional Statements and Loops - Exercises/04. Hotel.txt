@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _04.Hotel
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string month = Console.ReadLine();
+            int nights = int.Parse(Console.ReadLine());
+            double priceStudio = 0;
+            double priceDouble = 0;
+            double priceSuite = 0;
+
+
+            if (month == "May" || month == "October")
+            {
+                priceStudio = 50;
+                priceDouble = 65;
+                priceSuite = 75;
+            }
+            else if (month == "June" || month == "September")
+            {
+                priceStudio = 60;
+                priceDouble = 72;
+                priceSuite = 82;
+            }
+            else if (month == "July" || month == "August" || month == "December")
+            {
+                priceStudio = 68;
+                priceDouble = 77;
+                priceSuite = 89;
+            }
+
+
+            if (nights > 7 && month == "May" || nights > 7 && month == "October")
+            {
+                priceStudio = priceStudio - (priceStudio * 0.05);
+                if (month == "October" )
+                {
+
+                    Console.WriteLine($"Studio: {priceStudio * (nights - 1):f2} lv.");
+                    Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                    Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+                }
+                else
+                {
+
+                    Console.WriteLine($"Studio: {priceStudio * nights:f2} lv.");
+                    Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                    Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+                }
+            }
+            else if (nights > 7 && nights <= 14 && month == "September" )
+            {
+
+                Console.WriteLine($"Studio: {priceStudio * (nights - 1):f2} lv.");
+                Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+            }
+            else if (nights > 14 && month == "June" || nights > 14 && month == "September")
+            {
+                priceDouble = priceDouble - (priceDouble * 0.1);
+                if (month == "September")
+                {
+
+                    Console.WriteLine($"Studio: {priceStudio * (nights - 1):f2} lv.");
+                    Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                    Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+                }
+                else
+                {
+
+                    Console.WriteLine($"Studio: {priceStudio * nights:f2} lv.");
+                    Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                    Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+                }
+            }
+            else if (nights > 14 && month == "July" || nights > 14 && month == "August" || nights > 14 && month == "December")
+            {
+                priceSuite = priceSuite - (priceSuite * 0.15);
+                Console.WriteLine($"Studio: {priceStudio * nights:f2} lv.");
+                Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+            }
+
+            else
+            {
+                Console.WriteLine($"Studio: {priceStudio * nights:f2} lv.");
+                Console.WriteLine($"Double: {priceDouble * nights:f2} lv.");
+                Console.WriteLine($"Suite: {priceSuite * nights:f2} lv.");
+            }
+        }
+    }
+}

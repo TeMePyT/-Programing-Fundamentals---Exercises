@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _03.Restaurant_Discount
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int guests = int.Parse(Console.ReadLine());
+            string servicePackage = Console.ReadLine();
+            string hall;
+            double price = 0.0;
+            double priceDiscounted = 0.0;
+            double pricePerPerson = 0.0;
+
+            if(guests>0&&guests<=50)
+            {
+                hall = "Small Hall";
+                price = 2500;
+            }
+            else if(guests>50&& guests<=100)
+            {
+                hall = "Terrace";
+                price = 5000;
+            }
+            else if(guests>100&&guests<=120)
+            {
+                hall = "Great Hall";
+                price = 7500;
+            }
+            else
+            {
+                Console.WriteLine("We do not have an appropriate hall.");
+                return;
+            }
+            
+            if(servicePackage=="Normal")
+            {
+                price += 500;
+                priceDiscounted = price - (price * 0.05);
+                pricePerPerson = priceDiscounted / guests;
+            }
+            else if (servicePackage == "Gold")
+            {
+                price += 750;
+                priceDiscounted = price - (price * 0.1);
+                pricePerPerson = priceDiscounted / guests;
+            }
+            else if(servicePackage == "Platinum")
+            {
+                price += 1000;
+                priceDiscounted = price - (price * 0.15);
+                pricePerPerson = priceDiscounted / guests;
+            }
+            Console.WriteLine($"We can offer you the {hall}");
+            Console.WriteLine($"The price per person is {pricePerPerson:F2}$");
+        }
+    }
+}

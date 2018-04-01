@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace _05.Word_in_Plural
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string word = Console.ReadLine();
+            string[] ends = new string[] { "o", "ch", "s", "sh", "x", "z" };
+            if (word.EndsWith("y"))
+            {
+
+                Console.WriteLine(word.Trim(new char[] { 'y' }) + "ies");
+                return;
+            }
+
+            foreach (string s in ends)
+            {
+                if (word.EndsWith(s))
+                {
+                    Console.WriteLine(word + "es");
+                    return;
+                }
+
+            }
+
+            Console.WriteLine(word + "s");
+            return;
+
+
+        }
+    }
+}

@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _13.Game_of_Numbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = int.Parse(Console.ReadLine());
+            int b = int.Parse(Console.ReadLine());
+            int magicNumber = int.Parse(Console.ReadLine());
+            int counter = 0;
+
+            for (int i = b; i >= a; i--)
+            {
+                for (int j = a; j <= b; j++)
+                {
+                    counter++;
+                    if(i+j==magicNumber)
+                    {
+                        Console.WriteLine($"Number found! {i} + {j} = {magicNumber}");
+                        return;
+                    }
+                }
+            }
+            Console.WriteLine($"{counter} combinations - neither equals {magicNumber}");
+        }
+    }
+}
