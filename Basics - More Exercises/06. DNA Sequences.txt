@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _06.DNA_Sequences
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] nucleotides = new string[] { "", "A", "C", "G", "T" };
+
+            int value = int.Parse(Console.ReadLine());
+
+            int counter = 0;
+            for (int i = 1; i <5; i++)
+            {
+                for (int j = 1; j <5; j++)
+                {
+                    for (int k = 1; k < 5; k++)
+                    {
+                        if(i+j+k>=value)
+                        {
+                            Console.Write($"O{nucleotides[i]}{nucleotides[j]}{nucleotides[k]}O ");
+                            counter++;
+                        }
+                        else
+                        {
+                            Console.Write($"X{nucleotides[i]}{nucleotides[j]}{nucleotides[k]}X ");
+                            counter++;
+                        }
+                        if (counter == 4)
+                        {
+                            Console.WriteLine();
+                            counter = 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

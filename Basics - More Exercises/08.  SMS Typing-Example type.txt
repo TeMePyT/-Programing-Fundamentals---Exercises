@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _08.SMS_Typing_Example_type
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            
+            string message = "";
+            for (int i = 0; i < n; i++)
+            {
+                int number = int.Parse(Console.ReadLine());
+                if (number == 0)
+                {
+                    message += " ";
+                }
+                else
+                {
+                    int len = number.ToString().Length;
+                    int realNumber = number % 10;
+                    int startIndex = (realNumber - 2) * 3;
+
+                    if (realNumber == 8 || realNumber == 9)
+                    {
+                        startIndex++;
+                    }
+
+                    int letterIndex = startIndex + len - 1;
+                    message += (char)(97 + letterIndex);
+                }
+            }
+
+            Console.WriteLine(message);
+        }
+    }
+}

@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _02.Vapor_Store
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IDictionary<string, double> games = new Dictionary<string, double>
+            {
+                {"OutFall 4", 39.99 },
+                {"CS: OG", 15.99 },
+                {"Zplinter Zell", 19.99 },
+                {"Honored 2", 59.99 },
+                {"RoverWatch", 29.99 },
+                {"RoverWatch Origins Edition", 39.99 }
+
+            };
+            double balance = double.Parse(Console.ReadLine());
+            string gameToBuy = Console.ReadLine();
+            double value;
+            double moneyspent = 0;
+            while (gameToBuy != "Game Time")
+            {
+                if (games.ContainsKey(gameToBuy))
+                {
+
+                    games.TryGetValue(gameToBuy, out value);
+
+                    if (value > balance)
+                    {
+
+                        Console.WriteLine("Too Expensive");
+
+                    }
+                    else
+                    {
+                        balance -= value;
+                        moneyspent += value;
+                        Console.WriteLine($"Bought {gameToBuy}");
+                        if (balance <= 0)
+                        {
+                            Console.WriteLine("Out of money!");
+                            return;
+                        }
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Not Found");
+
+                }
+                gameToBuy = Console.ReadLine();
+            }
+            Console.WriteLine($"Total spent: ${moneyspent:f2}. Remaining: ${balance:f2}");
+        }
+    }
+}

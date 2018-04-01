@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _08.SMS_Typing
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[][] numbers = new string[10][];
+            numbers[2] = new string[] { "a", "b", "c" };
+            numbers[3] = new string[] { "d", "e", "f" };
+            numbers[4] = new string[] { "g", "h", "i" };
+            numbers[5] = new string[] { "j", "k", "l" };
+            numbers[6] = new string[] { "m", "n", "o" };
+            numbers[7] = new string[] { "p", "q", "r", "s" };
+            numbers[8] = new string[] { "t", "u", "v" };
+            numbers[9] = new string[] { "w", "x", "y", "z" };
+
+            int n = int.Parse(Console.ReadLine());
+            StringBuilder message = new StringBuilder();
+            for (int i = 0; i < n; i++)
+            {
+              int number = int.Parse(Console.ReadLine());
+                int realNumber = number % 10;
+
+                int numberCount = number.ToString().Count();
+
+                if(number==0)
+                {
+                    message.Append(" ");
+                }
+                else
+                {
+                    message.Append(numbers[realNumber][numberCount-1]);
+                }
+            
+            }
+            Console.WriteLine(message);
+        }
+    }
+}

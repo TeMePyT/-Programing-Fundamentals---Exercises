@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _04.Photo_Gallery
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int photoNumber = int.Parse(Console.ReadLine());
+
+            int dayTaken = int.Parse(Console.ReadLine());
+            int monthTaken = int.Parse(Console.ReadLine());
+            int yearTaken = int.Parse(Console.ReadLine());
+
+            int hoursTaken = int.Parse(Console.ReadLine());
+            int minutesTaken = int.Parse(Console.ReadLine());
+
+            double size = double.Parse(Console.ReadLine());
+
+            int width = int.Parse(Console.ReadLine());
+            int height = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Name: DSC_{photoNumber:D4}.jpg");
+            Console.WriteLine($"Date Taken: {dayTaken:d2}/{monthTaken:d2}/{yearTaken:d4} {hoursTaken:d2}:{minutesTaken:d2}");
+            if (size < 1000)
+            {
+                Console.WriteLine($"Size: {size}B");
+            }
+            else if (size >= 1000 && size < 1000000)
+            {
+                Console.WriteLine($"Size: {size / 1000}KB");
+            }
+            else
+            {
+                Console.WriteLine($"Size: {size/1000000}MB");
+            }
+            if(width>height)
+            {
+                Console.WriteLine($"Resolution: {width}x{height} (landscape)");
+            }
+            else if(width==height)
+            {
+                Console.WriteLine($"Resolution: {width}x{height} (square)");
+            }
+            else
+            {
+                Console.WriteLine($"Resolution: {width}x{height} (portrait)");
+            }
+        }
+    }
+}
