@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _03.Back_in_30_Minutes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int hours = int.Parse(Console.ReadLine());
+            int minutes = int.Parse(Console.ReadLine());
+
+            int minutesTotal = minutes+30;
+
+            if(minutesTotal>=60)
+            {
+                minutesTotal -= 60;
+                hours++;
+            }
+            if(hours>=24)
+            {
+                hours -= 24;
+            }
+            Console.WriteLine($"{hours}:{minutesTotal:D2}");
+
+        }
+    }
+}
