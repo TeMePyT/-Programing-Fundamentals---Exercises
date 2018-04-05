@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ConsoleApp7
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> number = Console.ReadLine().Split(' ').Select(int.Parse).ToList();
+            int[] special = Console.ReadLine().Split().Select(int.Parse).ToArray() ;
+
+            while (number.Contains(special[0]))
+            {
+                int position = number.IndexOf(special[0]);
+
+                if (position - special[1] < 0 && position + special[1] > number.Count)
+                    number.Clear();
+                else if (position - special[1] < 0)
+                    number.RemoveRange(0, 1 + special[1] + position);
+                else if (position + special[1] >= number.Count)
+                    number.RemoveRange(position - special[1], position);
+                else
+                    number.RemoveRange(position - special[1], 2 * special[1] + 1);
+            }
+            int sum = number.Sum();
+
+            Console.WriteLine(sum);
+        }
+    }
+}
