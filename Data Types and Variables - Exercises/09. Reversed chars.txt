@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _09.Reversed_chars
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char ch1 = Convert.ToChar(Console.ReadLine());
+            char ch2 = Convert.ToChar(Console.ReadLine());
+            char ch3 = Convert.ToChar(Console.ReadLine());
+
+            Console.Write(ch3);
+            Console.Write(ch2);
+            Console.WriteLine(ch1);
+        }
+    }
+}

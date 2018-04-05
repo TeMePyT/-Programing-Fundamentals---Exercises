@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _19.Thea_The_Photographer
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ulong numberOfPictures = ulong.Parse(Console.ReadLine());
+            ulong filterTime = ulong.Parse(Console.ReadLine());
+            ulong filterFactor = ulong.Parse(Console.ReadLine());
+            ulong uploadTime = ulong.Parse(Console.ReadLine());
+
+            ulong totalFilterTime = numberOfPictures * filterTime;
+            ulong usefullPictures = (ulong)Math.Ceiling(numberOfPictures * (filterFactor * 0.01));
+            ulong totalUploadTime = usefullPictures * uploadTime;
+            ulong totalTime = totalFilterTime + totalUploadTime;
+
+            TimeSpan time = TimeSpan.FromSeconds(Convert.ToDouble(totalTime));
+
+            Console.WriteLine(time.ToString(@"d\:hh\:mm\:ss"));
+
+        }
+    }
+}

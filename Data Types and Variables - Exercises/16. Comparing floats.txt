@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _16.Comparing_floats
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            decimal n = decimal.Parse(Console.ReadLine());
+            decimal m = decimal.Parse(Console.ReadLine());
+            decimal precision = 0.000001M;
+            decimal diff = Math.Abs(n - m);
+            if (diff >= precision)
+            {
+                Console.WriteLine("False");
+            }
+            else
+            {
+                Console.WriteLine("True");
+            }
+        }
+    }
+}

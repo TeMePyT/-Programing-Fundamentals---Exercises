@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _18.Different_Integers_Size
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            sbyte num1 = 0;
+            byte num2 = 0;
+            short num3 = 0;
+            ushort num4 = 0;
+            int num5 = 0;
+            uint num6 = 0;
+            long num7 = 0;
+
+            StringBuilder dataTypes = new StringBuilder();
+
+            var number = Console.ReadLine();
+            int counter = 0;
+
+
+            if (sbyte.TryParse(number, out num1))
+            {
+                dataTypes.AppendLine("* sbyte");
+                counter++;
+            }
+            if (byte.TryParse(number, out num2))
+            {
+                dataTypes.AppendLine("* byte");
+                counter++;
+            }
+            if (short.TryParse(number, out num3))
+            {
+                dataTypes.AppendLine("* short");
+                counter++;
+            }
+            if (ushort.TryParse(number, out num4))
+            {
+                dataTypes.AppendLine("* ushort");
+                counter++;
+            }
+            if (int.TryParse(number, out num5))
+            {
+                dataTypes.AppendLine("* int");
+                counter++;
+            }
+            if (uint.TryParse(number, out num6))
+            {
+                dataTypes.AppendLine("* uint");
+                counter++;
+            }
+            if (long.TryParse(number, out num7))
+            {
+                dataTypes.AppendLine("* long");
+                counter++;
+            }
+            if (counter == 0)
+            {
+                Console.WriteLine($"{number} can't fit in any type");
+
+            }
+            else
+            {
+                Console.WriteLine($"{number} can fit in:");
+                Console.WriteLine(dataTypes);
+            }
+        }
+    }
+}

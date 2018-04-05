@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _03.Practice_Chars_And_Strings
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            char ch;
+            string str;
+            for (int i = 0; i < 5; i++)
+            {
+                var words = Console.ReadLine();
+                if (words.Length == 1)
+                {
+                    ch = Convert.ToChar(words);
+                    Console.WriteLine(ch);
+                }
+                else
+                {
+                    str = words;
+                    Console.WriteLine(str);
+                }
+            }
+            
+        }
+    }
+}
