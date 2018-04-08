@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _05.Array_Manipulator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> arr = Console.ReadLine().Split(' ').Select(int.Parse).ToList();
+            string execute = Console.ReadLine();
+            while (execute != "print")
+            {
+                var pieces = execute.Split();
+                string command = pieces[0];
+                if (command == "add")
+                {
+                    int index = int.Parse(pieces[1]);
+                    int number = int.Parse(pieces[2]);
+                    
+                    arr.Insert(index, number);
+                }
+                if (command == "addMany")
+                {
+                    int index = int.Parse(pieces[1]);
+                    int[] toAdd = new int[pieces.Length - 2];
+                    for (int i = 0; i < toAdd.Length; i++)
+                    {
+                        toAdd[i] = int.Parse(pieces[i + 2]);
+                    }
+
+                    arr.InsertRange(index, toAdd);
+                }
+                if (command == "contains")
+                {
+                    int number = int.Parse(pieces[1]);
+                    Console.WriteLine(arr.IndexOf(number)); 
+                   
+                }
+                if (command == "remove")
+                {
+                    int index = int.Parse(pieces[1]);
+                    arr.RemoveAt(index);
+                }
+                if(command=="shift")
+                {
+                    int shiftBy = int.Parse(pieces[1]) % arr.Count;
+                    arr = Shift(arr, shiftBy);
+                }
+                if(command=="sumPairs")
+                {
+                    
+                    
+                    
+                    for (int i = 0; i < arr.Count-1; i++)
+                    {
+                        
+                        arr[i] += arr[i + 1];
+                        arr.RemoveAt(i + 1);
+                    }
+                  
+                }
+                execute = Console.ReadLine();
+            }
+            Console.WriteLine("["+string.Join(", ", arr)+"]");
+        }
+
+        private static List<int> Shift(List<int> list, int shiftBy)
+        {
+           
+            var result = list.GetRange(shiftBy, list.Count - shiftBy);
+            result.AddRange(list.GetRange(0, shiftBy));
+            return result;
+        }
+    }
+}
