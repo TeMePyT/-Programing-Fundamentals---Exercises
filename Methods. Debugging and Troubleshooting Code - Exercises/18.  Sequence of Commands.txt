@@ -14,12 +14,12 @@ public class SequenceOfCommands_broken
             .Select(int.Parse)
             .ToArray();
 
-        string[] line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); //четене на ред със задача 
-        string command = line[0]; //отделяне на командата в нова променлива
+        string[] line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); 
+        string command = line[0]; 
 
-        while (command!="stop") // stop вместо over
+        while (command!="stop") 
         {
-           //изтриваме един излишен прочит на конзолата
+           
 
             int[] args = new int[2];
 
@@ -32,20 +32,20 @@ public class SequenceOfCommands_broken
             }
 
             PerformAction(command, args, array);
-            //изтриваме едно излишно изписване на нов ред
+            
             PrintArray(array);
           
 
-            line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); //четем нов ред 
-            command = line[0];//инициализираме командата
+            line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); 
+            command = line[0];
         }
         Console.WriteLine();
     }
 
     private static void PerformAction( string action, int[] args, int[] arr)
     {
-        int[] array = arr; //не създаване нов array, насочваме го към стария(array са референтен тип).
-        int pos = args[0]-1; //индекс=позиция-1
+        int[] array = arr; 
+        int pos = args[0]-1; 
         int value = args[1];
 
         switch (action)
@@ -71,7 +71,7 @@ public class SequenceOfCommands_broken
 
     private static void ArrayShiftRight(int[] array)
     {
-        int temp = array[array.Length-1];//запазваме временно последна позиция за да я сложим отпред
+        int temp = array[array.Length-1];
         for (int i = array.Length - 1; i >= 1; i--)
         {
             array[i] = array[i - 1];
@@ -81,7 +81,7 @@ public class SequenceOfCommands_broken
 
     private static void ArrayShiftLeft(int[] array)
     {
-        int temp = array[0]; //запазваме временно 1-ва позиция за да я сложим накрая
+        int temp = array[0]; 
         for (int i = 0; i < array.Length - 1; i++)
         {
             array[i] = array[i + 1];
@@ -93,7 +93,7 @@ public class SequenceOfCommands_broken
     {
         for (int i = 0; i < array.Length; i++)
         {
-            Console.Write(array[i] + " "); // Console.Write за да изпишем всичко на 1 ред
+            Console.Write(array[i] + " "); 
         }
         Console.WriteLine();
     }
