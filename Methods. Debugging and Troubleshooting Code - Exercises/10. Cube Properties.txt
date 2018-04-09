@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _09.Longer_Line
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double edge = double.Parse(Console.ReadLine());
+            string parameter = Console.ReadLine();
+
+            if (parameter == "face")
+            {
+                Console.WriteLine($"{GetFaceDiagonal(edge):f2}");
+            }
+            else if (parameter == "space")
+            {
+                Console.WriteLine($"{GetSpaceDiagonal(edge):f2}");
+            }
+            else if (parameter == "volume")
+            {
+                Console.WriteLine($"{GetVolume(edge):f2}");
+            }
+            else if (parameter == "area")
+            {
+                Console.WriteLine($"{GetArea(edge):f2}");
+            }
+        }
+
+        private static double GetFaceDiagonal(double edge)
+        {
+            double faseDiagonal = Math.Sqrt(2 * Math.Pow(edge, 2));
+            return faseDiagonal;
+        }
+
+        private static double GetSpaceDiagonal(double edge)
+        {
+            double spaceDiagonal = Math.Sqrt(3 * Math.Pow(edge, 2));
+            return spaceDiagonal;
+        }
+
+        private static double GetVolume(double edge)
+        {
+            double volume = Math.Pow(edge, 3);
+            return volume;
+        }
+
+        private static double GetArea(double edge)
+        {
+            double area = 6 * Math.Pow(edge, 2);
+            return area;
+        }
+    }
+}

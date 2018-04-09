@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _16.Instruction_Set
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string opCode = Console.ReadLine();
+
+            while (opCode != "END")
+            {
+                long result = 0;
+                string[] codeArgs = opCode.Split(' ');
+                string command = codeArgs[0];
+                switch (command)
+                {
+                    case "INC":
+                        {
+                            long operandOne = long.Parse(codeArgs[1]);
+                            operandOne++;
+                            result = operandOne;
+                            Console.WriteLine(result);
+                            break;
+                        }
+                    case "DEC":
+                        {
+                            long operandOne = long.Parse(codeArgs[1]);
+                            operandOne--;
+                            result = operandOne;
+                            Console.WriteLine(result);
+                            break;
+                        }
+                    case "ADD":
+                        {
+                            long operandOne = long.Parse(codeArgs[1]);
+                            long operandTwo = long.Parse(codeArgs[2]);
+                            result = (long)operandOne + operandTwo;
+                            Console.WriteLine(result);
+                            break;
+                        }
+                    case "MLA":
+                        {
+                            long operandOne = long.Parse(codeArgs[1]);
+                            long operandTwo = long.Parse(codeArgs[2]);
+                            result = (long)operandOne * operandTwo;
+                            Console.WriteLine(result);
+                            break;
+
+                        }
+
+                }
+                opCode = Console.ReadLine();
+
+            }
+
+        }
+    }
+}

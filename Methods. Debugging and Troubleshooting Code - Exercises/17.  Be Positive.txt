@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _17.Be_Positive
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int countSequences = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < countSequences; i++)
+            {
+                //добавяме изчистване empty entries
+                string[] input = Console.ReadLine().Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var numbers = new List<int>();
+
+                for (int j = 0; j < input.Length; j++)
+                {
+
+                    int num = int.Parse(input[j]);
+                    numbers.Add(num);
+
+                }
+
+                bool found = false;
+
+                for (int j = 0; j < numbers.Count; j++)
+                {
+                    int currentNum = numbers[j];
+
+                    if (currentNum >= 0) // грешка тук, >
+                    {
+                        if (found)
+                        {
+                            Console.Write(" ");
+                        }
+
+                        Console.Write(currentNum);
+
+                        found = true;
+                    }
+                    else if (j + 1 < numbers.Count)
+                    {
+
+
+                        currentNum += numbers[j + 1];
+
+                        if (currentNum >= 0) // грешка тук, >
+                        {
+                            if (found)
+                            {
+                                Console.Write(" ");
+                            }
+
+                            Console.Write(currentNum);
+
+                            found = true;
+                        }
+                        j++; //  прескачаме индекс (заради събирането със следващия)
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("(empty)");
+                }
+                else
+                { 
+                Console.WriteLine();
+                }
+            }
+        }
+    }
+}

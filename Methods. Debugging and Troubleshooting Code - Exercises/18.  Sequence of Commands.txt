@@ -1,0 +1,100 @@
+using System;
+using System.Linq;
+
+public class SequenceOfCommands_broken
+{
+    private const char ArgumentsDelimiter = ' ';
+
+    public static void Main()
+    {
+        int sizeOfArray = int.Parse(Console.ReadLine());
+
+        int[] array = Console.ReadLine()
+            .Split(ArgumentsDelimiter)
+            .Select(int.Parse)
+            .ToArray();
+
+        string[] line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); //четене на ред със задача 
+        string command = line[0]; //отделяне на командата в нова променлива
+
+        while (command!="stop") // stop вместо over
+        {
+           //изтриваме един излишен прочит на конзолата
+
+            int[] args = new int[2];
+
+            if (command.Equals("add") ||
+                command.Equals("subtract") ||
+                command.Equals("multiply"))
+            {
+                args[0] = int.Parse(line[1]);
+                args[1] = int.Parse(line[2]);
+            }
+
+            PerformAction(command, args, array);
+            //изтриваме едно излишно изписване на нов ред
+            PrintArray(array);
+          
+
+            line = Console.ReadLine().Split(ArgumentsDelimiter).ToArray(); //четем нов ред 
+            command = line[0];//инициализираме командата
+        }
+        Console.WriteLine();
+    }
+
+    private static void PerformAction( string action, int[] args, int[] arr)
+    {
+        int[] array = arr; //не създаване нов array, насочваме го към стария(array са референтен тип).
+        int pos = args[0]-1; //индекс=позиция-1
+        int value = args[1];
+
+        switch (action)
+        {
+            case "multiply":
+                array[pos] *= value;
+                break;
+            case "add":
+                array[pos] += value;
+                break;
+            case "subtract":
+                array[pos] -= value;
+                break;
+            case "lshift":
+                ArrayShiftLeft(array);
+                break;
+            case "rshift":
+                ArrayShiftRight(array);
+                break;
+        }
+
+    }
+
+    private static void ArrayShiftRight(int[] array)
+    {
+        int temp = array[array.Length-1];//запазваме временно последна позиция за да я сложим отпред
+        for (int i = array.Length - 1; i >= 1; i--)
+        {
+            array[i] = array[i - 1];
+        }
+        array[0] = temp;
+    }
+
+    private static void ArrayShiftLeft(int[] array)
+    {
+        int temp = array[0]; //запазваме временно 1-ва позиция за да я сложим накрая
+        for (int i = 0; i < array.Length - 1; i++)
+        {
+            array[i] = array[i + 1];
+        }
+        array[array.Length - 1] = temp;
+    }
+
+    private static void PrintArray(int[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write(array[i] + " "); // Console.Write за да изпишем всичко на 1 ред
+        }
+        Console.WriteLine();
+    }
+}

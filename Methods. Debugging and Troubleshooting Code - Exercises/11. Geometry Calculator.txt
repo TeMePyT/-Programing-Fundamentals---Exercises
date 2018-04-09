@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _11.Geometry_Calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string figure = Console.ReadLine();
+
+            if(figure=="triangle")
+            {
+                double side = double.Parse(Console.ReadLine());
+                double height = double.Parse(Console.ReadLine());
+
+                Console.WriteLine($"{GetTriangleArea(side,height):F2}");
+            }
+            else if(figure=="square")
+            {
+                double side = double.Parse(Console.ReadLine());
+                Console.WriteLine($"{GetSquareArea(side):f2}");
+            }
+            else if(figure=="rectangle")
+            {
+                double width = double.Parse(Console.ReadLine());
+                double height = double.Parse(Console.ReadLine());
+                Console.WriteLine($"{GetRectangleArea(width, height):f2}");
+            }
+            else if(figure=="circle")
+            {
+                double radius = double.Parse(Console.ReadLine());
+                Console.WriteLine($"{GetCircleArea(radius):f2}");
+            }
+        }
+
+        private static double GetCircleArea(double radius)
+        {
+            double circleArea = Math.PI * Math.Pow(radius, 2);
+            return circleArea;
+        }
+
+        private static double GetRectangleArea(double width, double height)
+        {
+            double rectangleArea = width * height;
+            return rectangleArea;
+        }
+
+        private static double GetSquareArea(double side)
+        {
+            double squareArea = Math.Pow(side, 2);
+            return squareArea;
+        }
+
+        private static double GetTriangleArea(double side, double height)
+        {
+            double triangleArea = (side / 2) * height;
+            return triangleArea;
+        }
+    }
+}

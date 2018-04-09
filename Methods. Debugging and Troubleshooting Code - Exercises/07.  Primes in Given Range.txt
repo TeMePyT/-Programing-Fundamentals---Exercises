@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _07.Primes_in_Given_Range
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int startNum = int.Parse(Console.ReadLine());
+            int endNum = int.Parse(Console.ReadLine());
+            Console.WriteLine(string.Join(", ", FindPrimesInRange(startNum, endNum).ToList()));
+
+        }
+        static List<int> FindPrimesInRange(int startNum, int endNum)
+        {
+            List<int> Primes = new List<int>();
+           
+            
+            while (startNum <= endNum)
+            {
+                bool IsPrime = true;
+                double squareRoot = (int)Math.Floor(Math.Sqrt(startNum));
+                if (startNum < 2)
+                {
+                    IsPrime = false;
+                }
+                for (int i = 2; i <= squareRoot; i++)
+                {
+                    if (startNum % i == 0) 
+                    
+                    {
+                        IsPrime = false;
+                    }
+                    
+                }
+                if(IsPrime)
+                {
+                    Primes.Add(startNum);
+                }
+                startNum++;
+            }
+            return Primes;
+        }
+    }
+}

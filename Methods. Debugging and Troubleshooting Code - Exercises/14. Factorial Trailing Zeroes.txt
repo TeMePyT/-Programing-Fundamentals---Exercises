@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _14.Factorial_Trailing_Zeroes
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            
+            int count = GetTrailingZeros(GetFactorial(n));
+
+            Console.WriteLine(count);
+        }
+
+        static int GetTrailingZeros(BigInteger num)
+        {
+            string str = num.ToString();
+            string[] ss = str.Split('0');
+            int count = 0;
+            for (int i = ss.Length - 1; i >= 0; i--)
+            {
+                if (ss[i] == "")
+                    count = count + 1;
+                else
+                    break;
+            }
+            return count;
+        }
+
+        private static BigInteger GetFactorial(int n)
+        {
+            BigInteger factorial = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                factorial *= i;
+            }
+            return factorial;
+        }
+    }
+}

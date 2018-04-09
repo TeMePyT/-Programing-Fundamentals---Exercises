@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _09.Longer_Line
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double x1 = double.Parse(Console.ReadLine());
+            double y1 = double.Parse(Console.ReadLine());
+            double x2 = double.Parse(Console.ReadLine());
+            double y2 = double.Parse(Console.ReadLine());
+            double xx1 = double.Parse(Console.ReadLine());
+            double yy1 = double.Parse(Console.ReadLine());
+            double xx2 = double.Parse(Console.ReadLine());
+            double yy2 = double.Parse(Console.ReadLine());
+            PrintLongerLine(x1, y1, x2, y2, xx1, yy1, xx2, yy2);
+        }
+
+        private static void PrintLongerLine(double x1, double y1, double x2, double y2, double xx1, double yy1, double xx2, double yy2)
+        {
+            double firstLineLen = Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
+            double secondLineLen = Math.Sqrt(Math.Pow((xx2 - xx1), 2) + Math.Pow((yy2 - yy1), 2));
+
+            if (firstLineLen >= secondLineLen)
+            {
+                bool isFirstCloser = GetCloserpoint(x1, y1, x2, y2);
+                if (isFirstCloser)
+                {
+                    Console.WriteLine($"({x1}, {y1})({x2}, {y2})");
+                }
+                else
+                {
+                    Console.WriteLine($"({x2}, {y2})({x1}, {y1})");
+                }
+            }
+            else
+            {
+                bool isFirstCloser = GetCloserpoint(xx1, yy1, xx2, yy2);
+                if (isFirstCloser)
+                {
+                    Console.WriteLine($"({xx1}, {yy1})({xx2}, {yy2})");
+                }
+                else
+                {
+                    Console.WriteLine($"({xx2}, {yy2})({xx1}, {yy1})");
+                }
+            }
+        }
+
+        private static bool GetCloserpoint(double x1, double y1, double x2, double y2)
+        {
+            double d1 = Math.Pow(x1, 2) + Math.Pow(y1, 2);
+            double d2 = Math.Pow(x2, 2) + Math.Pow(y2, 2);
+            bool IsFirst = true;
+            if (d1 <= d2)
+            {
+                IsFirst = true;
+
+            }
+            else
+            {
+                IsFirst = false;
+
+            }
+            return IsFirst;
+        }
+    }
+}

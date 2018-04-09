@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _12.Master_Number
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int number = int.Parse(Console.ReadLine());
+
+            for (int i = 1; i <= number; i++)
+            {
+                if (IsPalindrome(i.ToString()) && SumOfDigits(i) && ContainsEvenDigit(i))
+                {
+                    Console.WriteLine(i);
+                }
+            }
+        }
+
+        private static bool ContainsEvenDigit(int i)
+        {
+            int len = i.ToString().Length;
+            int[] arr = new int[len];
+            for (int j = 0; j < len; j++)
+            {
+                int lastDigit = i % 10;
+                arr[j] = lastDigit;
+                i /= 10;
+            }
+            bool Contains = false;
+            foreach (int n in arr)
+            {
+                if (n % 2 == 0)
+                {
+                    Contains = true;
+                }
+            }
+            return Contains;
+        }
+
+        private static bool SumOfDigits(int i)
+        {
+            int len = i.ToString().Length;
+            int[] arr = new int[len];
+            for (int j = 0; j < len; j++)
+            {
+                int lastDigit = i % 10;
+                arr[j] = lastDigit;
+                i /= 10;
+            }
+            int sum = 0;
+            for (int k = 0; k < len; k++)
+            {
+                sum += arr[k];
+            }
+            bool SumOfDigits = true;
+            if (sum % 7 != 0)
+            {
+                SumOfDigits = false;
+            }
+            return SumOfDigits;
+        }
+
+        private static bool IsPalindrome(string str)
+        {
+
+            if (str.Length == 1 || str.Length == 0) return true;
+            return str[0] == str[str.Length - 1] && IsPalindrome(str.Substring(1, str.Length - 2));
+        }
+
+    }
+}
