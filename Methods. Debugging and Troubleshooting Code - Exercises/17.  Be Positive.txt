@@ -14,7 +14,7 @@ namespace _17.Be_Positive
 
             for (int i = 0; i < countSequences; i++)
             {
-                //добавяме изчистване empty entries
+                
                 string[] input = Console.ReadLine().Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var numbers = new List<int>();
 
@@ -32,7 +32,7 @@ namespace _17.Be_Positive
                 {
                     int currentNum = numbers[j];
 
-                    if (currentNum >= 0) // грешка тук, >
+                    if (currentNum >= 0)
                     {
                         if (found)
                         {
@@ -49,7 +49,7 @@ namespace _17.Be_Positive
 
                         currentNum += numbers[j + 1];
 
-                        if (currentNum >= 0) // грешка тук, >
+                        if (currentNum >= 0) 
                         {
                             if (found)
                             {
@@ -60,7 +60,7 @@ namespace _17.Be_Positive
 
                             found = true;
                         }
-                        j++; //  прескачаме индекс (заради събирането със следващия)
+                        j++; 
                     }
                 }
 
