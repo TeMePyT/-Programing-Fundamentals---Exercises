@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _03.Last_K_Numbers_Sums
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num1 = int.Parse(Console.ReadLine());
+            int num2 = int.Parse(Console.ReadLine());
+
+            long[] sequence = new long[num1];
+            sequence[0] = 1;
+            for (int i = 1; i < num1; i++)
+            {
+                long sum = 0;
+                int counter = 0;
+                for (int j = i; j >=0; j--)
+                {
+                    sum += sequence[j];
+                    counter++;
+                    if(counter>num2)
+                    {
+                        break;
+                    }
+                }
+                sequence[i] = sum;
+            }
+            Console.WriteLine(string.Join(" ", sequence));
+        }
+    }
+}

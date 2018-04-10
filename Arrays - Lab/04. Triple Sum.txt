@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _04.Triple_Sum
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            bool IsFound = false;
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                long sum = 0;
+                for (int j = 1; j < arr.Length; j++)
+                {
+                    if (i < j)
+                    {
+                        sum = arr[i] + arr[j];
+                        for (int k = 0; k < arr.Length; k++)
+                        {
+                            if (sum == arr[k])
+                            {
+                                Console.WriteLine($"{arr[i]} + {arr[j]} == {arr[k]}");
+                                IsFound = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if(!IsFound)
+            {
+                Console.WriteLine("No");
+            }
+        }
+    }
+}
