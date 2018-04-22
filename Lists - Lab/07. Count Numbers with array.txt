@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _07.Count_Numbers_with_array
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = Console.ReadLine()
+                .Split(' ')
+                .Select(int.Parse)
+                .ToList();
+            numbers.Sort();
+            int[] grouped = new int[1000];
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                grouped[numbers[i]]++;
+            }
+            for (int i = 0; i < grouped.Length; i++)
+            {
+                if(grouped[i]>0)
+                {
+
+                    Console.WriteLine("{0} -> {1}", i, grouped[i]);
+                }
+            }
+        }
+    }
+}
