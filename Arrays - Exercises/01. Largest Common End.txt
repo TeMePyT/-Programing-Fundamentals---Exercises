@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _01.Largest_Common_End
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] arr1 = Console.ReadLine().Split(' ').ToArray();
+            string[] arr2 = Console.ReadLine().Split(' ').ToArray();
+
+            int minLength = Math.Min(arr1.Length, arr2.Length);
+            int maxLength = Math.Max(arr1.Length, arr2.Length);
+            int startCount = 0;
+            int endCount = 0;
+            for (int i = 0; i < minLength; i++)
+            {
+                if (arr1[i] == arr2[i])
+                {
+                    startCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            Array.Reverse(arr1);
+            Array.Reverse(arr2);
+            for (int i = 0; i < minLength; i++)
+            {
+                
+                if (arr1[i] == arr2[i])
+                {
+                    endCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            int longestLength = Math.Max(startCount, endCount);
+            Console.WriteLine(longestLength);
+        }
+    }
+}
