@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _02.Odd_Occurrences
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] words = Console.ReadLine()
+                .ToLower()
+                .Split(' ')
+                .ToArray();
+            Dictionary<string, int> wordsCount = new Dictionary<string, int>();
+
+            foreach (string word in words)
+            {
+                if (!wordsCount.ContainsKey(word))
+                {
+                    wordsCount.Add(word, 0);
+                }
+                wordsCount[word]++;
+            }
+            List<string> oddCount = new List<string>();
+            foreach (KeyValuePair<string, int> word in wordsCount)
+            {
+                if (word.Value % 2 != 0)
+                {
+                    oddCount.Add(word.Key);
+                }
+            }
+            Console.WriteLine(string.Join(", ", oddCount));
+        }
+    }
+}
