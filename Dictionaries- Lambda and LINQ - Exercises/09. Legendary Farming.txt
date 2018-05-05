@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _09.Legendary_Farming
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, int> materials = new Dictionary<string, int>
+            {
+                {"shards", 0},
+                {"fragments", 0},
+                { "motes",0}
+
+            };
+            Dictionary<string, int> junk = new Dictionary<string, int>();
+           
+
+            int quantity = 0;
+            string[] input = Console.ReadLine().ToLower().Split(' ').ToArray();
+            while (true)
+            {
+                
+                for (int i = 0; i < input.Length; i++)
+                {
+
+                    if (i % 2 == 0)
+                    {
+                        quantity = int.Parse(input[i]);
+                    }
+                    else
+                    {
+                        if (input[i] == "shards" || input[i] == "fragments" || input[i] == "motes")
+                        {
+                              materials[input[i]] += quantity;
+                            
+                            if (input[i] == "shards" && materials[input[i]] >= 250)
+                            {
+                                Console.WriteLine("Shadowmourne obtained!");
+                                materials[input[i]] -= 250;
+                                
+                                foreach (var material in materials.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                                foreach (var material in junk.OrderBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                                return;
+                            }
+                            else if (input[i] == "fragments" && materials[input[i]] >= 250)
+                            {
+                                Console.WriteLine("Valanyr obtained!");
+                                materials[input[i]] -= 250;
+                                
+                                foreach (var material in materials.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                                foreach (var material in junk.OrderBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                               return;
+                            }
+                            else if (input[i] == "motes" && materials[input[i]] >= 250)
+                            {
+                                Console.WriteLine("Dragonwrath obtained!");
+                                materials[input[i]] -= 250;
+                              
+                                foreach (var material in materials.OrderByDescending(x => x.Value).ThenBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                                foreach (var material in junk.OrderBy(x => x.Key))
+                                {
+                                    Console.WriteLine($"{material.Key}: {material.Value}");
+                                }
+                                return;
+                            }
+                        }
+                        
+                        else
+                        {
+                            if(!junk.ContainsKey(input[i]))
+                            {
+                                junk.Add(input[i], quantity);
+                            }
+                            else
+                            {
+                                junk[input[i]] += quantity;
+                            }
+                        }
+
+                    }
+                   
+                }
+                input = Console.ReadLine().ToLower().Split(' ').ToArray();
+            }
+        }
+    }
+}

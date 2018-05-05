@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _04.Fix_Emails
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string command = Console.ReadLine();
+            string key = string.Empty;
+            string value = string.Empty;
+            int counter = 1;
+            Dictionary<string, string> emails = new Dictionary<string, string>();
+
+            while(command!="stop")
+            {
+                if(counter%2!=0)
+                {
+                    key = command;
+                }
+                else
+                {
+                    value = command;
+                    string[] check = value.Split(new char[] { '@', '.' }).ToArray();
+                    if(check[check.Length-1]=="us"||check[check.Length-1]=="uk")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        emails.Add(key, value);
+                    }
+                }
+                counter++;
+                command = Console.ReadLine();
+            }
+            foreach(KeyValuePair<string, string>user in emails)
+            {
+                Console.WriteLine($"{user.Key} -> {user.Value}");
+            }
+        }
+    }
+}

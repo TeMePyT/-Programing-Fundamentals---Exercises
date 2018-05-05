@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _08.Logs_Aggregator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, Dictionary<string, int>> logs = new Dictionary<string, Dictionary<string, int>>();
+
+            int n = int.Parse(Console.ReadLine());
+            string user = string.Empty;
+            string ip = string.Empty;
+            int time = 0;
+            for (int i = 0; i < n; i++)
+            {
+                string[] input = Console.ReadLine().Split(' ').ToArray();
+                ip = input[0];
+                user = input[1];
+                time = int.Parse(input[2]);
+                if (!logs.ContainsKey(user))
+                {
+                    Dictionary<string, int> temp = new Dictionary<string, int>();
+                    temp.Add(ip, time);
+                    logs.Add(user, temp);
+                }
+                else
+                {
+                    if (!logs[user].ContainsKey(ip))
+                    {
+                        logs[user].Add(ip, time);
+                    }
+                    else
+                    {
+                        logs[user][ip] += time;
+                    }
+                }
+
+            }
+            foreach (var userPair in logs.OrderBy(x => x.Key))
+            {
+                List<string> ips = new List<string>();
+                foreach (var ipPair in userPair.Value.OrderBy(x=>x.Key))
+                {
+                    ips.Add(ipPair.Key);
+                }
+                ips = ips.Distinct().ToList();
+                Console.WriteLine($"{userPair.Key}: {userPair.Value.Values.Sum()} [{string.Join(", ", ips)}]");
+            }
+        }
+    }
+}

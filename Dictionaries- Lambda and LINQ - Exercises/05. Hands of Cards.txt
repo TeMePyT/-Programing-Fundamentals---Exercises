@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _5.Hands_of_Cards
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, List<string>> playerHands = new Dictionary<string, List<string>>();
+
+            string[] hand = Console.ReadLine().Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+            string name = string.Empty;
+            int sum = 0;
+
+            while(hand[0]!="JOKER")
+            {
+                List<string> cards = hand[1].Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                name = hand[0];
+                cards = cards.Distinct().ToList();
+                if(!playerHands.ContainsKey(name))
+                {
+                    playerHands.Add(name, cards);
+                }
+                else
+                {
+                    playerHands[name].AddRange(cards);
+                    playerHands[name] = playerHands[name].Distinct().ToList();
+                }
+                hand = Console.ReadLine().Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            }
+            foreach(var player in playerHands)
+            {
+                int value = 0;
+                int multyplier = 0;
+                char findTen = 'a';
+                foreach(var card in player.Value)
+                {
+                    foreach(var item in card)
+                    {
+                        if (item == 'J')
+                        {
+                            value += 11;
+                        }
+                        else if(item=='Q')
+                        {
+                            value += 12;
+                        }
+                        else if (item == 'K')
+                        {
+                            value += 13;
+                        }
+                        else if (item == 'A')
+                        {
+                            value += 14;
+                        }
+                        else if(item<60)
+                        {
+                            value += item - 48;
+                        }
+                        else if (item == 'S')
+                        {
+                            multyplier += 4;
+                        }
+                        else if (item == 'H')
+                        { 
+                            multyplier += 3;
+                        }
+                        else if (item == 'D')
+                        { 
+                            multyplier += 2;
+                        }
+                        else if (item == 'C')
+                        { 
+                            multyplier += 1;
+                        }
+                        if (findTen == '1' && item == '0') //number 10
+                        { 
+                            value += 9;
+                        }
+                        findTen = item;
+                    }
+                    sum += value * multyplier;
+                    value = 0;
+                    multyplier = 0;
+                }
+                Console.WriteLine($"{player.Key}: {sum}");
+                sum = 0;
+            }
+        }
+    }
+}

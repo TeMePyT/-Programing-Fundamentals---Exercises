@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _6.User_Logs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, Dictionary<string, int>> ipLogs = new Dictionary<string, Dictionary<string, int>>();
+
+            string[] input = Console.ReadLine().Split(' ').ToArray();
+
+            string user = string.Empty;
+            string ip = string.Empty;
+
+            while (input[0] != "end")
+            {
+                string[] ipInput = input[0].Split('=').ToArray();
+                ip = ipInput[1];
+                string[] userInput = input[2].Split('=').ToArray();
+                user = userInput[1];
+
+                if (!ipLogs.ContainsKey(user))
+                {
+                    Dictionary<string, int> current = new Dictionary<string, int>();
+                    current.Add(ip, 1);
+                    ipLogs.Add(user, current);
+                }
+                else
+                {
+                    if (!ipLogs[user].ContainsKey(ip))
+                    {
+                        ipLogs[user].Add(ip, 1);
+                    }
+                    else
+                    {
+                        ipLogs[user][ip]++;
+                    }
+                }
+                input = Console.ReadLine().Split(' ').ToArray();
+            }
+            foreach (var currentuUser in ipLogs.OrderBy(x=>x.Key))
+            {
+                Console.WriteLine($"{currentuUser.Key}:");
+                List<string> temp = new List<string>();
+                foreach (var ipLog in currentuUser.Value)
+                {
+                    temp.Add($"{ipLog.Key} => {ipLog.Value}");
+                }
+                Console.WriteLine(string.Join(", ", temp)+".");
+            }
+
+        }
+    }
+}

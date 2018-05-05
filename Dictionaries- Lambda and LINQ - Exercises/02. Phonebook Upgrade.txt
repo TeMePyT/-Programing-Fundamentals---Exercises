@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _02.Phonebook_Upgrade
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] numbers = Console.ReadLine()
+               .Split(' ')
+               .ToArray();
+
+            SortedDictionary<string, string> phoneBook = new SortedDictionary<string, string>();
+
+            string command = numbers[0];
+            while (command != "END")
+            {
+                if (command == "A")
+                {
+                    if (!phoneBook.ContainsKey(numbers[1]))
+                    {
+                        phoneBook.Add(numbers[1], numbers[2]);
+                    }
+
+                    phoneBook[numbers[1]] = numbers[2];
+
+                }
+                else if (command == "S")
+                {
+                    if (phoneBook.ContainsKey(numbers[1]))
+                    {
+                        foreach (KeyValuePair<string, string> contact in phoneBook)
+                        {
+                            if (contact.Key == numbers[1])
+                            {
+                                Console.WriteLine($"{contact.Key} -> {contact.Value}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Contact {numbers[1]} does not exist.");
+                    }
+                }
+                else if(command== "ListAll")
+                {
+                    foreach(KeyValuePair<string, string> contact in phoneBook)
+                    {
+                        Console.WriteLine($"{contact.Key} -> {contact.Value}");
+                    }
+                }
+                numbers = Console.ReadLine()
+                .Split(' ')
+                .ToArray();
+                command = numbers[0];
+            }
+        }
+    }
+}
