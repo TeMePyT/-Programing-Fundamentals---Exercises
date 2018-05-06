@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _11.Dragon_Army
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            var newdragon = new List<Dragon>();
+            List<string> types = new List<string>();
+            for (int i = 0; i < n; i++)
+            {
+                string[] dragon = Console.ReadLine().Split(' ').ToArray();
+                string type = dragon[0];
+                string name = dragon[1];
+                int damage = dragon[2] != "null" ? int.Parse(dragon[2]) : 45;
+                int health = dragon[3] != "null" ? int.Parse(dragon[3]) : 250;
+                int armor = dragon[4] != "null" ? int.Parse(dragon[4]) : 10;
+                Dragon oldDragon = newdragon.Find(x => x.Name == name && x.Type == type);
+                if (oldDragon == null)
+                {
+                    newdragon.Add(new Dragon(name, type, damage, health, armor));
+                    types.Add(type);
+                }
+                else
+                {
+                    oldDragon.Damage = damage;
+                    oldDragon.Health = health;
+                    oldDragon.Armor = armor;
+                }
+            }
+            types = types.Distinct().ToList();
+            foreach (var type in types)
+            {
+                var dragons = newdragon.Where(x => x.Type == type).OrderBy(x => x.Name);
+                var averageStr = dragons.Average(x => x.Damage);
+                var averageHealth = dragons.Average(x => x.Health);
+                var averageArmor = dragons.Average(x => x.Armor);
+                Console.WriteLine($"{type}::({averageStr:f2}/{averageHealth:f2}/{averageArmor:f2})");
+
+                foreach (var dragon in dragons)
+                {
+                    Console.WriteLine($"-{dragon.Name} -> damage: {dragon.Damage}, health: {dragon.Health}, armor: {dragon.Armor}");
+                }
+
+            }
+        }
+    }
+    class Dragon
+    {
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public int Damage { get; set; }
+        public int Health { get; set; }
+        public int Armor { get; set; }
+        public Dragon(string name, string type, int damage, int health, int armor)
+        {
+            Type = type;
+            Name = name;
+            Damage = damage;
+            Health = health;
+            Armor = armor;
+        }
+    }
+}
