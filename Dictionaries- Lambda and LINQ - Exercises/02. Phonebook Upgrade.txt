@@ -21,25 +21,13 @@ namespace _02.Phonebook_Upgrade
             {
                 if (command == "A")
                 {
-                    if (!phoneBook.ContainsKey(numbers[1]))
-                    {
-                        phoneBook.Add(numbers[1], numbers[2]);
-                    }
-
                     phoneBook[numbers[1]] = numbers[2];
-
                 }
                 else if (command == "S")
                 {
                     if (phoneBook.ContainsKey(numbers[1]))
                     {
-                        foreach (KeyValuePair<string, string> contact in phoneBook)
-                        {
-                            if (contact.Key == numbers[1])
-                            {
-                                Console.WriteLine($"{contact.Key} -> {contact.Value}");
-                            }
-                        }
+                        Console.WriteLine($"{numbers[1]} -> {phoneBook[numbers[1]]}");
                     }
                     else
                     {
