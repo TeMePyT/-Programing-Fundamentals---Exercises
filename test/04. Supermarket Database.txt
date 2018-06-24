@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _04.Supermarket_Database
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] input = Console.ReadLine().Split(' ').ToArray();
+            Dictionary<string, KeyValuePair<double, double>> itemPriceQuantity = new Dictionary<string, KeyValuePair<double, double>>();
+            while(input[0]!="stocked")
+            {
+                string name = input[0];
+                double price = double.Parse(input[1]);
+                double quantity = double.Parse(input[2]);
+                KeyValuePair<double, double> priceQuantity = new KeyValuePair<double, double>(price, quantity);
+                if (!itemPriceQuantity.ContainsKey(name))
+                {
+                    itemPriceQuantity.Add(name, priceQuantity);
+                }
+                else
+                {
+                    itemPriceQuantity[name] = new KeyValuePair<double, double>(price, itemPriceQuantity[name].Value + quantity);
+                }
+                input = Console.ReadLine().Split(' ');
+            }
+            double total = 0.0;
+            foreach(KeyValuePair<string, KeyValuePair<double, double>> item in itemPriceQuantity)
+            {
+                Console.WriteLine($"{item.Key}: ${item.Value.Key:F2} * {item.Value.Value} = ${item.Value.Key*item.Value.Value:F2}");
+                total += item.Value.Key * item.Value.Value;
+            }
+            Console.WriteLine("------------------------------");
+            Console.WriteLine($"Grand Total: ${total:F2}");
+        }
+    }
+}

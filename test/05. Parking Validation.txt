@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _05.Parking_Validation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            Dictionary<string, string> usernames = new Dictionary<string, string>();
+            for (int i = 0; i < n; i++)
+            {
+                string[] input = Console.ReadLine().Split(' ').ToArray();
+                string command = input[0];
+                string user = input[1];
+                if (command == "unregister")
+                {
+                    if (!usernames.ContainsKey(user))
+                    {
+                        Console.WriteLine($"ERROR: user {user} not found");
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"user {user} unregistered successfully");
+                        usernames.Remove(user);
+                        continue;
+                    }
+                }
+                else if (command == "register")
+                {
+                    if (usernames.ContainsKey(user))
+                    {
+                        Console.WriteLine($"ERROR: already registered with plate number {usernames[user]}");
+                        continue;
+                    }
+                    string plate = input[2];
+                    bool legit = true;
+                    if (plate.Length == 8)
+                    {
+                        char[] check = input[2].ToCharArray();
+                        for (int j = 0; j < check.Length; j++) 
+                        {
+                            if (j < 2 || j > 5)
+                            {
+                                if (!char.IsUpper(check[j]))
+                                {
+                                    legit = false;
+                                    Console.WriteLine($"ERROR: invalid license plate {plate}");
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                if (!char.IsNumber(check[j]))
+                                {
+                                    legit = false;
+                                    Console.WriteLine($"ERROR: invalid license plate {plate}");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (legit)
+                    {
+                        if (usernames.ContainsValue(plate))
+                        {
+                            Console.WriteLine($"ERROR: license plate {plate} is busy");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{user} registered {plate} successfully");
+                            usernames[user] = plate;
+                        }
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, string> user in usernames)
+            {
+                Console.WriteLine($"{user.Key} => { user.Value}");
+            }
+        }
+    }
+}

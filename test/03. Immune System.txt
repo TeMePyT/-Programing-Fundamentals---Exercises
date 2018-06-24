@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _03.Immune_System
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double immuneHealth = double.Parse(Console.ReadLine());
+            string virus = Console.ReadLine();
+            double remainingHealth = immuneHealth;
+            Dictionary<string, int> virusDatabase = new Dictionary<string, int>();
+            while (virus != "end")
+            {
+                double sum = 0;
+                for (int i = 0; i < virus.Length; i++)
+                {
+                    sum += virus[i];
+                }
+                double virusStrength = Math.Floor(sum / 3); ;
+                double timeToDefeat = 0.0;
+                if (!virusDatabase.ContainsKey(virus))
+                {
+                    virusDatabase.Add(virus, 0);
+                    timeToDefeat = virusStrength * virus.Length;
+                }
+                else if (virusDatabase.ContainsKey(virus))
+                {
+                    virusDatabase[virus]++;
+                    timeToDefeat = (virusStrength * virus.Length) / 3;
+                }
+                remainingHealth = Math.Ceiling(remainingHealth - timeToDefeat);
+                Console.WriteLine($"Virus {virus}: {virusStrength} => {Math.Floor(timeToDefeat)} seconds");
+
+                if (remainingHealth <= 0)
+                {
+                    Console.WriteLine("Immune System Defeated.");
+                    return;
+                }
+                else
+                {
+                    double minutes = Math.Floor(timeToDefeat / 60);
+                    double seconds = Math.Floor(timeToDefeat % 60);
+                    Console.WriteLine($"{virus} defeated in {minutes}m {seconds}s.");
+                    Console.WriteLine($"Remaining health: {remainingHealth}");
+                }
+                remainingHealth = Math.Floor(remainingHealth + remainingHealth * 0.2);
+                if (remainingHealth > immuneHealth)
+                {
+                    remainingHealth = immuneHealth;
+                }
+                virus = Console.ReadLine();
+            }
+            Console.WriteLine($"Final Health: {remainingHealth}");
+        }
+    }
+}
